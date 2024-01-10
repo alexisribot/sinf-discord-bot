@@ -1,0 +1,5 @@
+Shinny.db
+dist
+.env
+.vscode
+node_modules

@@ -1,0 +1,20 @@
+{
+    "name": "projet-neobot",
+    "version": "1.0.0",
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "tsc && node dist/main.js"
+    },
+    "author": "wiiZ",
+    "license": "ISC",
+    "dependencies": {
+        "discord.js": "14.14.1",
+        "dotenv": "16.3.1",
+        "sqlite3": "5.1.7"
+    },
+    "devDependencies": {
+        "typescript": "5.3.3"
+    }
+}
