@@ -1,4 +1,4 @@
-import { GuildMember, Message } from "discord.js";
+import { Guild, GuildMember, Message } from "discord.js";
 import { UserShinies } from "src/domain/entities/UserShinies";
 import { DiscordAdapter } from "../adapters/DiscordAdapter";
 import { CardboardUseCase } from "../application/useCases/CardboardUseCase";
@@ -119,16 +119,7 @@ N'oubliez pas de respecter la syntaxe et de profiter de la chasse aux shinies ! 
                     this.discordAdapter.sendToChannel(message.channel.id, msg, [fridgeGifUrl]);
 
                     setTimeout(() => {
-                        message.guild?.channels.cache.forEach(async (channel) => {
-                            channel.edit({
-                                permissionOverwrites: [
-                                    {
-                                        id: this.selectedMember?.id || "",
-                                        allow: ["SendMessages"],
-                                    },
-                                ],
-                            });
-                        });
+                        this.rouletteUseCase.unbanMember(message.guild || ({} as Guild), this.selectedMember?.id || "");
                         this.discordAdapter.sendToChannel(message.channel.id, `${this.selectedMember?.user.toString()} est de retour parmi nous !`);
                         this.isRouletteInProgress = false;
                     }, 10000);

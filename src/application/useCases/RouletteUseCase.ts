@@ -57,6 +57,19 @@ export class RouletteUseCase {
         this.rouletteRepository.banUser(selectedMemberId, bannedBy, 10);
     }
 
+    unbanMember(guild: Guild, selectedMemberId: string) {
+        guild.channels.cache.forEach(async (channel) => {
+            channel.edit({
+                permissionOverwrites: [
+                    {
+                        id: selectedMemberId,
+                        allow: ["SendMessages"],
+                    },
+                ],
+            });
+        });
+    }
+
     async getBannedMembersRanking(): Promise<string> {
         const bannedUsers = await this.rouletteRepository.getBannedUsers();
         const bannedUsersDetail = await this.rouletteService.getBannedMembers(bannedUsers);
