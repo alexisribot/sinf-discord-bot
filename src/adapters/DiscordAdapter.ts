@@ -11,11 +11,11 @@ export class DiscordAdapter {
         this.bot.on("messageCreate", callback);
     }
 
-    sendToChannel(channelId: string, message: string) {
+    sendToChannel(channelId: string, message: string, files?: string[]) {
         const channel = this.bot.channels.cache.get(channelId);
 
         if (channel instanceof TextChannel) {
-            channel.send(message);
+            channel.send({ content: message, files });
         }
     }
 
